@@ -1,0 +1,27 @@
+{
+  "name": "tharp",
+  "version": "0.0.1",
+  "description": "Inverse Kinematic solvers for robotic limbs, optimized for Johnny-Five",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dtex/tharp"
+  },
+  "keywords": [
+    "robot",
+    "johnny-five",
+    "inverse kinematics"
+  ],
+  "author": "Donovan Buck <donovan@donovan.bz>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dtex/tharp/issues"
+  },
+  "homepage": "https://github.com/dtex/tharp",
+  "dependencies": {
+    "vektor": "^0.3.0"
+  }
+}
