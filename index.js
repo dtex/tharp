@@ -2,27 +2,47 @@ var vector = require("vektor").vector,
   rotate = require("vektor").rotate,
   matrix = require("vektor").matrix;
 
-module.exports = {
+// Decorate our servos object to that we have all the info we
+// need to define the kinematic chain
+//
+// @param {Object} opts Options: {actuators, systemType, origin, bones }
+//  - opts.actuators {Servos}: The Servos() object that contains the chain's actuators
+//  - opts.systemType {String}: One of the pre-defined system types. Don't see your
+//    system type? Open an issue, or better yet a Pull Request!
+//  - opts.origin {Array}: A three-tuple representing the x, y and z offset of the
+//    chain's origin point from the robot's origin point.
+//  - opts.segments {Object}: An object with the segment names and lengths for our system
+//    The names vary with the systemType
+//
+// returns the Servos() object this was called upon
+function Chain(opts) {
+
+  if (!(this instanceof Chain)) {
+    return new Chain(opts);
+  }
+
+  actuators = opts.actuators;
+  actuators.origin = opts.origin;
+  acutators.segments = opts.segments;
+  actuators["@@render"] = doIK[opts.systemType];
 
   // Move all the servos so our end effectors are at the
-  // target position
+  // target position. This method is bound to the Servos()
+  // object as its @@render method.
   //
-  // @param {Object} opts Options: {chain, position, orientation}
-  //  - opts.chain {Servos}: This must be a Johnny-Five Servos() instance
-  //    that contains the servos used in the chain. Prior to using this
-  //    method the Servos object must be run through tharp.makeChain().
-  //  - opts.origin {Array}: Three tuple of kinematic chain origin relative
-  //    to the robots origin point
+  // @param {Object} opts Options: {position, orientation}
+  //  - opts.position {Array}: Three tuple of desired end effector position
+  //    in x,y,z coordinates
   //  - opts.orientation {Object}: {[pitch][, roll][, yaw]}
   //    pitch, roll and yaw are given in radians
   //
   // returns the Servos() object this was called upon
-  render: function( opts ) {
+  Chain.prototype.render = function( opts ) {
     var angles = solve(opts);
-    opts.chain.forEach(function(device, index) {
+    this.forEach(function(device, index) {
       device["@@render"](angles[index]);
     });
-  },
+  };
 
   // Find the angles needed to position the end effector
   // at a desired point
@@ -39,7 +59,7 @@ module.exports = {
   //    a list of types)
   //
   // returns a three tuple [x, y, z]
-  solve: function( opts ) {
+  Chain.prototype.solve = function( opts ) {
 
     var solution;
     var invalid = false;
@@ -54,8 +74,7 @@ module.exports = {
 
     return doIK[opts.type](opts, offsetPosition);
 
-  },
-
+  };
 
   // Find an end effector's position relative to the kinematic chain origin
   //
@@ -68,7 +87,7 @@ module.exports = {
   //    pitch, roll and yaw are given in radians
   //
   // returns a three tuple [x, y, z]
-  eePosition: function(opts) {
+  Chain.prototype.eePosition = function(opts) {
 
     var pos = opts.position || [0, 0, 0];
     var oPos = opts.origin || [0, 0, 0];
@@ -103,9 +122,9 @@ module.exports = {
 
     return posVector.v;
 
-  },
+  };
 
-  doIK: {
+  Chain.prototype.doIK = {
     A: function(opts, offsetPosition) {
 
       // Put the coordinates into seperate variables for readability
@@ -154,17 +173,17 @@ module.exports = {
 
       return angles;
     }
-  },
+  };
 
   // Convert radians to degrees
-  radToDeg: function(x) {
+  Chain.prototype.radToDeg = function(x) {
     return x / Math.PI * 180;
-  },
+  };
 
   // Convert degrees to radians
-  degToRad: function(x) {
+  Chain.prototype.degToRad = function(x) {
     return x / 180 * Math.PI;
-  },
+  };
 
   // Given three sides this will solve a triangle using law of cosines
   //
@@ -173,9 +192,9 @@ module.exports = {
   // @param {Number} c: The opposite side's length
   //
   // Returns the angle in radians
-  solveAngle: function(a, b, c) {
+  Chain.prototype.solveAngle = function(a, b, c) {
     return Math.acos((a * a + b * b - c * c) / (2 * a * b));
-  },
+  };
 
   // Given an angle in radian and a range in degrees will find the correct
   // quadrant for the servo to hit that angle.
@@ -186,7 +205,7 @@ module.exports = {
   //
   // Returns the angle in degrees unless no solution can be found. In which
   // case false is returned.
-  findValidAngle: function(angle, range) {
+  Chain.prototype.findValidAngle = function(angle, range) {
     var degrees = radToDeg(angle);
 
     if (degrees > range[1] || degrees < range[0]) {
@@ -210,6 +229,10 @@ module.exports = {
     // The angle passed in was valid so just return that in degrees
     return degrees;
 
-  }
+  };
 
-};
+  return actuators;
+
+}
+
+module.exports = Chain;
