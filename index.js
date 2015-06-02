@@ -2,8 +2,30 @@ var vector = require("vektor").vector,
   rotate = require("vektor").rotate,
   matrix = require("vektor").matrix;
 
-// Decorate our servos object to that we have all the info we
-// need to define the kinematic chain
+// Wrap our chains into a single object we can control
+//
+// @param {Object} opts Options: {chains, offset, orientation}
+//  - opts.chains {Array} An array of chains that makeup this robot
+//  - opts.offset {Array} A three element array describing an offset
+//    for the robot's origin point. This can be used to shift the
+//    robot's position relative to its origin point (picture the
+//    robot shifting it's weight along the x/z plane or stretching
+//    to be taller without moving the end effectors)
+//  - opts.orientation {Array} A three element array of Numbers
+//    giving the rotation of the robot's chassis around its
+//    origin point (make it dance! )
+Robot(opts) {
+
+  if (!(this instanceof Chain)) {
+    return new Chain(opts);
+  }
+
+  Object.defineProperties(this, opts);
+
+}
+
+// Wrap our servos object so that we have all the info and
+// methods we need to define and solve our the kinematic system
 //
 // @param {Object} opts Options: {actuators, systemType, origin, bones }
 //  - opts.actuators {Servos}: The Servos() object that contains the chain's actuators
@@ -14,7 +36,7 @@ var vector = require("vektor").vector,
 //  - opts.segments {Object}: An object with the segment names and lengths for our system
 //    The names vary with the systemType
 //
-// returns the Servos() object this was called upon
+// returns this chain
 function Chain(opts) {
 
   if (!(this instanceof Chain)) {
@@ -24,24 +46,20 @@ function Chain(opts) {
   actuators = opts.actuators;
   actuators.origin = opts.origin;
   acutators.segments = opts.segments;
-  actuators["@@render"] = doIK[opts.systemType];
+  actuators["@@render"] = this.render;
 
   // Move all the servos so our end effectors are at the
   // target position. This method is bound to the Servos()
   // object as its @@render method.
   //
-  // @param {Object} opts Options: {position, orientation}
-  //  - opts.position {Array}: Three tuple of desired end effector position
-  //    in x,y,z coordinates
-  //  - opts.orientation {Object}: {[pitch][, roll][, yaw]}
-  //    pitch, roll and yaw are given in radians
-  //
   // returns the Servos() object this was called upon
-  Chain.prototype.render = function( opts ) {
-    var angles = solve(opts);
-    this.forEach(function(device, index) {
-      device["@@render"](angles[index]);
-    });
+  Chain.prototype.render = function( ) {
+    if (this.angles) {
+      this.forEach(function(device, index) {
+        // This will call the device's render method
+        device["@@render"](angles[index]);
+      });
+    }
   };
 
   // Find the angles needed to position the end effector
@@ -57,6 +75,9 @@ function Chain(opts) {
   //    pitch, roll and yaw are given in radians
   //  - opts.type {String}: The type of chain (see the readme for
   //    a list of types)
+  //  - opts.immediate {Boolean}: Will move the servos immediately this
+  //    is usually a bad idea since other legs (chains) of your robot
+  //    may not have a valid solution and will not move.
   //
   // returns a three tuple [x, y, z]
   Chain.prototype.solve = function( opts ) {
@@ -72,7 +93,11 @@ function Chain(opts) {
       orientation: orientation
     });
 
-    return doIK[opts.type](opts, offsetPosition);
+    this.angles = doIK[opts.systemType](opts, offsetPosition);
+
+    if (opts.immediate) {
+      this.render();
+    }
 
   };
 
@@ -231,8 +256,11 @@ function Chain(opts) {
 
   };
 
-  return actuators;
+  return this;
 
 }
 
-module.exports = Chain;
+module.exports = {
+  Tharp.Robot,
+  Tharp.Chain
+};
