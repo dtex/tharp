@@ -1,5 +1,7 @@
 # tharp
 
+[![Join the chat at https://gitter.im/dtex/tharp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dtex/tharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Tharp is not ready for you! Check back soon.
 Tharp is an inverse kinematics solver and robot controller for Johnny-Five. Tharp makes hard things easy.
 
