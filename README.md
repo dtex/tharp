@@ -18,14 +18,14 @@ Tharp documentation can be found in the [wiki](https://github.com/dtex/tharp/wik
 // This is a simple excerpt, illustrating the configuration
 // of robot with two legs
 var five = require("johnny-five"),
-  Tharp = require("tharp");
+  tharp = require("tharp");
 
 var board = new five.Board().on("ready", function() {
 
   /* === Begin robot configuration === */
 
   // Tharp.Chain() wraps our actuators and adds properties
-  // that define the kinematic system. The "type" property defines
+  // that define the kinematic system. The "chainType" property defines
   // the joint/segment configuration.
   var leftLeg = new tharp.Chain({
     actuators: [
@@ -51,7 +51,7 @@ var board = new five.Board().on("ready", function() {
 
   // Robot() wraps our chains, gives us a place to orient the
   // robot chassis and ensures that all chains can be rendered
-  // before rendering the entire robot move
+  // before rendering the entire robot movement
   var robot = new tharp.Robot({
     chains: [leftLeg, rightLeg]
   });
