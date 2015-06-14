@@ -62,7 +62,7 @@ var board = new five.Board().on("ready", function() {
 
   // Now we can orient the chassis
   robot.orientation({ pitch: 0.1, roll: -0.08, yaw: -0.13 });
-  robot.offset({ x: 1, y: -0.2, z: -1 });
+  robot.offset([ 1, -0.2, -1 ]);
 
   // And position our end effectors
   leftLegChain.position([8.25, -5.0, 12.25]);
