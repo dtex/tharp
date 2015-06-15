@@ -274,6 +274,12 @@ var ikSolvers = {
     // It really is easier than I make it sound.
     femurAngle -= Math.sin(yd/hypot2d);
 
+    // If the chain is on the left side we need to modify our solutions
+    if (offsetPosition[0] < 0) {
+      femurAngle = Math.PI - femurAngle;
+      tibiaAngle = Math.PI - tibiaAngle;
+    }
+
     // Just two things left: The angles are in radians (we need degrees
     // for our servo) and the angles may or may not be within our servo's
     // range. Fix that with findValidAngle().
