@@ -41,8 +41,7 @@ exports["Robot"] = {
   setUp: function(done) {
 
     this.robot = new tharp.Robot({
-      chains: [mockChain, mockChain],
-      robotType: "hexapod"
+      chains: [mockChain, mockChain]
     });
 
     this.normalizeSpy = sinon.spy(mockChain.devices, "@@normalize");

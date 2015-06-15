@@ -22,8 +22,6 @@ function Robot(opts) {
 
   this.chains = opts.chains;
 
-  this["@@render"] = robotSolvers[opts.robotType];
-
   this.offset = opts.offset || [0, 0, 0];
 
   if (!opts.orientation) {
@@ -38,12 +36,34 @@ function Robot(opts) {
 
 }
 
+// Call the @@normalize function on each of the chains
 Robot.prototype["@@normalize"] = function(keyFrameSet) {
   keyFrameSet.forEach(function( keyFrames, index ) {
     keyFrames = this.chains[index].devices["@@normalize"]([keyFrames])[0];
   }, this);
 
   return keyFrameSet;
+};
+
+// Find the solution for each chain. Make sure that all requied chains
+// have a valid solution before rendering the robot movement
+Robot.prototype["@@render"] = function(opts) {
+
+  var passed = true;
+
+  this.chains.forEach( function(chain, index) {
+    var success = chain.solve({position: opts[index]});
+    if (!success) {
+      passed = false;
+    }
+  });
+
+  if (passed) {
+    this.chains.forEach( function(chain) {
+      chain.devices["@@render"](chain.angles);
+    });
+  }
+
 };
 
 // Wrap our servos object so that we have all the info and
@@ -130,6 +150,9 @@ Chain.prototype.solve = function( opts ) {
   if (opts.immediate) {
     this["@@render"](this.angles);
   }
+
+  // If one of the joints could not be solved, return false
+  return (this.angles.indexOf(false) !== -1);
 
 };
 
@@ -291,16 +314,6 @@ var ikSolvers = {
     var angles = [coxaDegrees, femurDegrees, tibiaDegrees];
 
     return angles;
-  }
-};
-
-var robotSolvers = {
-  "hexapod": function(opts) {
-    // Find solutions for all the legs
-    this.chains.forEach( function(chain, index) {
-      chain.solve({position: opts[index]});
-    });
-
   }
 };
 
