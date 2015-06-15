@@ -19,37 +19,37 @@ var mockTibiaServoLeft = new mockServo({ range: [190, 340]});
 
 exports["CoxaY-FemurZ-TibiaZ"] = {
 
-  // q1xq34: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
-  //   }, [6, 4, 2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 18.435);
-  //   test.equal(angles[1].toPrecision(5), 53.218);
-  //   test.equal(angles[2].toPrecision(5), -134.06);
-  //
-  //   test.done();
-  // },
+  q1xq34: function(test) {
 
-  // q2xq34: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
-  //   }, [-6, 4, 2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 161.57);
-  //   test.equal(angles[1].toPrecision(5), 164.91);
-  //   test.equal(angles[2].toPrecision(5), 293.10);
-  //
-  //   test.done();
-  // },
+    test.expect(3);
+
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
+    }, [10, 4, 2]);
+
+    test.equal(angles[0].toPrecision(5), 11.310);
+    test.equal(angles[1].toPrecision(5), 43.362);
+    test.equal(angles[2].toPrecision(5), -106.93);
+
+    test.done();
+  },
+
+  q2xq34: function(test) {
+
+    test.expect(3);
+
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
+    }, [-10, 4, 2]);
+
+    test.equal(angles[0].toPrecision(5), 168.69);
+    test.equal(angles[1].toPrecision(5), 136.64);
+    test.equal(angles[2].toPrecision(5), 286.93);
+
+    test.done();
+  },
 
   // q3xq34: function(test) {
   //
