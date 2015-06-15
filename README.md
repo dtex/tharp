@@ -2,10 +2,10 @@
 
 [![Join the chat at https://gitter.im/dtex/tharp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dtex/tharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Tharp is not ready for you! Check back soon.
-Tharp is an inverse kinematics solver and robot controller for Johnny-Five. Tharp makes hard things easy.
+## Tharp is almost ready for you! But not quite yet :-)
+Tharp was designed to fit the needs of the amateur roboticist who wants to do some of the programming on their robot, but not all of it.
 
-To use Tharp you first define your kinematic system using Tharp.Chain. Once you have each chain defined you can group them under a Tharp.Robot. Once all that is done you can position the end effector of each chain and call Robot.Render. If all the chains can be solved the robot will move all the end effectors to their desired positions.
+Tharp is an inverse kinematics solver and robot manager designed to work with Johnny-Five. It makes the hard things easy.
 
 ### Installation
 ````bash
