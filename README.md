@@ -30,6 +30,7 @@ var board = new five.Board().on("ready", function() {
   // that define the kinematic system. The "chainType" property defines
   // the joint/segment configuration.
   var leftLeg = new tharp.Chain({
+    constructor: five.Servos,
     actuators: [
       {pin:40, offset: 24, startAt: 0, range: [0, 90] },
       {pin:39, offset: 87, startAt: 78, range: [-80, 78] },
@@ -41,6 +42,7 @@ var board = new five.Board().on("ready", function() {
   });
 
   var rightLeg = new tharp.Chain({
+    constructor: five.Servos,
     actuators: [
       {pin:27, offset: -31, startAt: 180, range: [90, 180] },
       {pin:26, offset: -77, startAt: 102, range: [110, 260] },

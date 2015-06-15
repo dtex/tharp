@@ -1,7 +1,5 @@
 var vector = require("vektor").vector,
-  rotate = require("vektor").rotate,
-  matrix = require("vektor").matrix,
-  five =  require("johnny-five");
+  rotate = require("vektor").rotate;
 
 // Wrap our chains into a single object we can control
 //
@@ -67,7 +65,11 @@ function Chain(opts) {
     return new Chain(opts);
   }
 
-  this.devices = new five.Servos(opts.actuators);
+  if (opts.contructor) {
+    this.devices = new opts.constructor(opts.actuators);
+  } else {
+    this.devices = opts.actuators;
+  }
 
   this.chainType = opts.chainType;
 
@@ -111,10 +113,6 @@ function Chain(opts) {
 //
 // returns a three tuple [x, y, z]
 Chain.prototype.solve = function( opts ) {
-
-  var solution;
-  var invalid = false;
-  var posMatrix = new matrix(1,3);
 
   if (opts.position) {
     this.position = opts.position;
@@ -201,7 +199,6 @@ var degToRad = function(x) {
 //
 // Returns the angle in radians
 var solveAngle = function(a, b, c) {
-  console.log("Sides: ", a, b, c);
   return Math.acos((a * a + b * b - c * c) / (2 * a * b));
 };
 
@@ -277,8 +274,6 @@ var ikSolvers = {
     // It really is easier than I make it sound.
     femurAngle -= Math.sin(yd/hypot2d);
 
-    console.log("Raw Angles: ", coxaAngle, femurAngle, tibiaAngle);
-
     // Just two things left: The angles are in radians (we need degrees
     // for our servo) and the angles may or may not be within our servo's
     // range. Fix that with findValidAngle().
@@ -297,10 +292,7 @@ var robotSolvers = {
   "hexapod": function(opts) {
     // Find solutions for all the legs
     this.chains.forEach( function(chain, index) {
-      console.log("____________________________");
-      console.log("Position:", opts[index]);
       chain.solve({position: opts[index]});
-      console.log("Angles: ", chain.angles);
     });
 
   }
@@ -309,6 +301,7 @@ var robotSolvers = {
 module.exports = {
   Chain: Chain,
   Robot: Robot,
+  ikSolvers: ikSolvers,
   radToDeg: radToDeg,
   degToRad: degToRad,
   solveAngle: solveAngle,
