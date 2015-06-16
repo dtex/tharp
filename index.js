@@ -85,7 +85,7 @@ function Chain(opts) {
     return new Chain(opts);
   }
 
-  if (opts.contructor) {
+  if (opts.constructor) {
     this.devices = new opts.constructor(opts.actuators);
   } else {
     this.devices = opts.actuators;
@@ -148,11 +148,11 @@ Chain.prototype.solve = function( opts ) {
   this.angles = ikSolvers[this.chainType](this, offsetPosition);
 
   if (opts.immediate) {
-    this["@@render"](this.angles);
+    this.devices["@@render"](this.angles);
   }
 
   // If one of the joints could not be solved, return false
-  return (this.angles.indexOf(false) !== -1);
+  return (this.angles.indexOf(false) === -1);
 
 };
 
@@ -295,7 +295,7 @@ var ikSolvers = {
     // subtract the angle described by the end effector, the femur origin
     // and the femur's axis of rotation.
     // It really is easier than I make it sound.
-    femurAngle -= Math.sin(yd/hypot2d);
+    femurAngle += Math.sin(yd/hypot2d);
 
     // If the chain is on the left side we need to modify our solutions
     if (offsetPosition[0] < 0) {
