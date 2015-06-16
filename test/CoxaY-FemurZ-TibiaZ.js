@@ -19,6 +19,75 @@ var mockTibiaServoLeft = new mockServo({ range: [190, 340]});
 
 exports["CoxaY-FemurZ-TibiaZ"] = {
 
+  // Quadrant 1 on the XZ plane, quadrant 1 or 2 on the XY plane
+  q1xq12: function(test) {
+
+    test.expect(3);
+
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
+    }, [12, 1, 2]);
+
+    test.equal(angles[0].toPrecision(5), 9.4623);
+    test.equal(angles[1].toPrecision(5), 62.593);
+    test.equal(angles[2].toPrecision(5), -96.203);
+
+    test.done();
+  },
+
+  // Quadrant 2 on the XZ plane, quadrant 1 or 2 on the XY plane
+  q2xq12: function(test) {
+
+    test.expect(3);
+
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
+    }, [-12, 1, 2]);
+
+    test.equal(angles[0].toPrecision(5), 170.54);
+    test.equal(angles[1].toPrecision(5), 117.41);
+    test.equal(angles[2].toPrecision(5), 276.20);
+
+    test.done();
+  },
+
+  // Quadrant 3 on the XZ plane, quadrant 1 or 2 on the XY plane
+  q3xq12: function(test) {
+
+    test.expect(3);
+
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
+    }, [-12, 1, -2]);
+
+    test.equal(angles[0].toPrecision(5), 189.46);
+    test.equal(angles[1].toPrecision(5), 117.41);
+    test.equal(angles[2].toPrecision(5), 276.20);
+
+    test.done();
+  },
+
+  // Quadrant 4 on the XZ plane, quadrant 1 or 2 on the XY plane
+  q4xq12: function(test) {
+
+    test.expect(3);
+
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
+    }, [12, 1, -2]);
+
+    test.equal(angles[0].toPrecision(5), 170.54);
+    test.equal(angles[1].toPrecision(5), 242.59);
+    test.equal(angles[2].toPrecision(5), 263.80);
+
+    test.done();
+  },
+
+  // Quadrant 1 on the XZ plane, quadrant 3 or 4 on the XY plane
   q1xq34: function(test) {
 
     test.expect(3);
@@ -26,15 +95,16 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
     var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
-    }, [10, 4, 2]);
+    }, [12, -1, 2]);
 
-    test.equal(angles[0].toPrecision(5), 11.310);
-    test.equal(angles[1].toPrecision(5), 43.362);
-    test.equal(angles[2].toPrecision(5), -106.93);
+    test.equal(angles[0].toPrecision(5), 9.4623);
+    test.equal(angles[1].toPrecision(5), 53.184);
+    test.equal(angles[2].toPrecision(5), -96.203);
 
     test.done();
   },
 
+  // Quadrant 2 on the XZ plane, quadrant 3 or 4 on the XY plane
   q2xq34: function(test) {
 
     test.expect(3);
@@ -42,108 +112,46 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
     var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
-    }, [-10, 4, 2]);
+    }, [-12, -1, 2]);
 
-    test.equal(angles[0].toPrecision(5), 168.69);
-    test.equal(angles[1].toPrecision(5), 136.64);
-    test.equal(angles[2].toPrecision(5), 286.93);
+    test.equal(angles[0].toPrecision(5), 170.54);
+    test.equal(angles[1].toPrecision(5), 126.82);
+    test.equal(angles[2].toPrecision(5), 276.20);
 
     test.done();
   },
 
-  // q3xq34: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
-  //   }, [-6, 4, -2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 161.57);
-  //   test.equal(angles[1].toPrecision(5), 164.91);
-  //   test.equal(angles[2].toPrecision(5), 293.10);
-  //
-  //   test.done();
-  // },
+  // Quadrant 3 on the XZ plane, quadrant 3 or 4 on the XY plane
+  q3xq34: function(test) {
 
-  // q4xq34: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
-  //   }, [6, 4, -2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 161.57);
-  //   test.equal(angles[1].toPrecision(5), 164.91);
-  //   test.equal(angles[2].toPrecision(5), 293.10);
-  //
-  //   test.done();
-  // },
-  //
-  // q1xq12: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
-  //   }, [6, -4, 2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 18.435);
-  //   test.equal(angles[1].toPrecision(5), 15.094);
-  //   test.equal(angles[2].toPrecision(5), -113.10);
-  //
-  //   test.done();
-  // },
+    test.expect(3);
 
-  // q2xq12: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
-  //   }, [-6, -4, 2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 161.57);
-  //   test.equal(angles[1].toPrecision(5), 164.91);
-  //   test.equal(angles[2].toPrecision(5), 293.10);
-  //
-  //   test.done();
-  // },
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
+    }, [-12, -1, -2]);
 
-  // q3xq12: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
-  //   }, [-6, -4, -2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 161.57);
-  //   test.equal(angles[1].toPrecision(5), 164.91);
-  //   test.equal(angles[2].toPrecision(5), 293.10);
-  //
-  //   test.done();
-  // },
+    test.equal(angles[0].toPrecision(5), 189.46);
+    test.equal(angles[1].toPrecision(5), 126.82);
+    test.equal(angles[2].toPrecision(5), 276.20);
 
-  // q4xq12: function(test) {
-  //
-  //   test.expect(3);
-  //
-  //   var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
-  //     segments: { femur: 7.6125, tibia: 10.4 },
-  //     devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
-  //   }, [6, -4, -2]);
-  //
-  //   test.equal(angles[0].toPrecision(5), 161.57);
-  //   test.equal(angles[1].toPrecision(5), 164.91);
-  //   test.equal(angles[2].toPrecision(5), 293.10);
-  //
-  //   test.done();
-  // }
+    test.done();
+  },
+
+  // Quadrant 4 on the XZ plane, quadrant 3 or 4 on the XY plane
+  q4xq34: function(test) {
+
+    test.expect(3);
+
+    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+      segments: { femur: 7.6125, tibia: 10.4 },
+      devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
+    }, [12, -1, -2]);
+
+    test.equal(angles[0].toPrecision(5), 170.54);
+    test.equal(angles[1].toPrecision(5), 233.18);
+    test.equal(angles[2].toPrecision(5), 263.80);
+
+    test.done();
+  },
 };
