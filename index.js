@@ -183,10 +183,11 @@ Chain.prototype.eePosition = function(opts) {
   var roll = orientation.roll || 0;
   var pitch = orientation.pitch || 0;
   var yaw = orientation.yaw || 0;
+  var offset = opts.offset || [0, 0, 0];
 
-  var xOffset = opts.offset[0] || 0;
-  var yOffset = opts.offset[1] || 0;
-  var zOffset = opts.offset[2] || 0;
+  var xOffset = offset[0] || 0;
+  var yOffset = offset[1] || 0;
+  var zOffset = offset[2] || 0;
 
   pos = [pos[0] - xOffset, pos[1] - yOffset, pos[2] - zOffset];
 
