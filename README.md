@@ -69,8 +69,8 @@ var board = new five.Board().on("ready", function() {
   robot.offset([ 1, -0.2, -1 ]);
 
   // And position our end effectors
-  leftLegChain.position([8.25, -5.0, 12.25]);
-  rightLegChain.position([-8.25, -5.0, 12.25]);
+  leftLegChain.solve({position: [8.25, -5.0, 12.25]});
+  rightLegChain.solve({position: [-8.25, -5.0, 12.25]});
 
   // Move everything
   robot.render();
