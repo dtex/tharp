@@ -51,12 +51,15 @@ Robot.prototype["@@render"] = function(opts) {
 
   var passed = true;
 
+  opts = opts || {};
+
   this.chains.forEach( function(chain, index) {
-    var success = chain.solve({position: opts[index]});
-    if (!success) {
-      passed = false;
+    if (opts.length < index - 1) {
+      opts[index] = chain.position;
     }
-  });
+    chain.solve({position: opts[index], orientation: this.orientation, offset: this.offset });
+
+  }, this);
 
   if (passed) {
     this.chains.forEach( function(chain) {
@@ -134,14 +137,19 @@ function Chain(opts) {
 // returns a three tuple [x, y, z]
 Chain.prototype.solve = function( opts ) {
 
-  if (opts.position) {
-    this.position = opts.position;
+  opts = opts || {};
+
+  if (opts) {
+    this.position = opts.position || this.position;
+    this.orientation = opts.orientation || this.orientation;
+    this.offset = opts.offset || this.offset;
   }
 
   // Find the end effector position relative to the chain origin
   var offsetPosition = this.eePosition({
     position: this.position,
     origin: this.origin,
+    offset: this.offset,
     orientation: this.orientation
   });
 
@@ -175,6 +183,12 @@ Chain.prototype.eePosition = function(opts) {
   var roll = orientation.roll || 0;
   var pitch = orientation.pitch || 0;
   var yaw = orientation.yaw || 0;
+
+  var xOffset = opts.offset[0] || 0;
+  var yOffset = opts.offset[1] || 0;
+  var zOffset = opts.offset[2] || 0;
+
+  pos = [pos[0] - xOffset, pos[1] - yOffset, pos[2] - zOffset];
 
   // End effector position
   var posVector = new vector(pos);
