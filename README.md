@@ -9,6 +9,8 @@ Tharp was designed to fit the needs of the amateur roboticist who wants to do so
 
 Tharp is an inverse kinematics solver and robot manager designed to work with Johnny-Five. It makes the hard things easy.
 
+[![Tharp Response Time Demo](http://img.youtube.com/vi/gabm8QdO29Q/0.jpg)](http://www.youtube.com/watch?v=gabm8QdO29Q)
+
 ### Installation
 ````bash
 npm install tharp
