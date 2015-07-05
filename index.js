@@ -57,7 +57,9 @@ Robot.prototype["@@render"] = function(opts) {
     if (opts.length < index - 1) {
       opts[index] = chain.position;
     }
-    chain.solve({position: opts[index], orientation: this.orientation, offset: this.offset });
+    if (!(chain.solve({position: opts[index], orientation: this.orientation, offset: this.offset }))) {
+      passed = false;
+    }
 
   }, this);
 
@@ -99,7 +101,7 @@ function Chain(opts) {
   this.segments = opts.segments;
 
   this.origin = opts.origin || [0, 0, 0];
-  this.position = opts.position || [0, 0, 0];
+  this.position = opts.startAt || [0, 0, 0];
 
   this.require = opts.require || true;
 
@@ -159,8 +161,15 @@ Chain.prototype.solve = function( opts ) {
     this.devices["@@render"](this.angles);
   }
 
-  // If one of the joints could not be solved, return false
-  return (this.angles.indexOf(false) === -1);
+  // If all the joints could be solved, return true and update last
+  if (this.angles.indexOf(false) === -1) {
+    this.devices.last = {
+      target: this.position
+    };
+    return true;
+  } else {
+    return false;
+  }
 
 };
 
