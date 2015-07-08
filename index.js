@@ -39,7 +39,7 @@ function Robot(opts) {
 // Call the @@normalize function on each of the chains
 Robot.prototype["@@normalize"] = function(keyFrameSet) {
   keyFrameSet.forEach(function( keyFrames, index ) {
-    keyFrames = this.chains[index].devices["@@normalize"]([keyFrames])[0];
+    keyFrames = this.chains[index]["@@normalize"](keyFrames);
   }, this);
 
   return keyFrameSet;
@@ -226,6 +226,25 @@ Chain.prototype.eePosition = function(opts) {
 
   return posVector.v;
 
+};
+
+// Call the @@normalize function on the chain
+Chain.prototype["@@normalize"] = function(keyFrames) {
+
+  if (keyFrames[0] === null ) {
+    keyFrames[0] = {
+      position: this.position
+    };
+  }
+
+  keyFrames.forEach(function(keyFrame) {
+    if (typeof keyFrame.position !== "undefined") {
+      keyFrame.value = keyFrame.position;
+    }
+  });
+
+  keyFrames = this.devices["@@normalize"]([keyFrames])[0];
+  return keyFrames;
 };
 
 // Convert radians to degrees
