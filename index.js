@@ -42,7 +42,6 @@ Robot.prototype["@@normalize"] = function(keyFrameSet) {
     keyFrames = this.chains[index]["@@normalize"]([keyFrames])[0];
     keyFrames = this.chains[index].devices["@@normalize"]([keyFrames])[0];
   }, this);
-
   return keyFrameSet;
 };
 
@@ -179,7 +178,7 @@ Chain.prototype["@@normalize"] = function(keyFrameSet) {
     var last;
 
     // If first element is null, use last position
-    if(keyFrames[0] === null) {
+    if (keyFrames[0] === null) {
       keyFrames[0] = { position: this.position };
     }
 
@@ -206,7 +205,7 @@ Chain.prototype["@@normalize"] = function(keyFrameSet) {
     });
 
     // If last element is null, use last position
-    if(keyFrames[keyFrames.length - 1] === null) {
+    if (keyFrames[keyFrames.length - 1] === null) {
       keyFrames[keyFrames.length - 1] = last;
     }
 
