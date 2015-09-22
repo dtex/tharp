@@ -39,7 +39,8 @@ function Robot(opts) {
 // Call the @@normalize function on each of the chains
 Robot.prototype["@@normalize"] = function(keyFrameSet) {
   keyFrameSet.forEach(function( keyFrames, index ) {
-    keyFrames = this.chains[index]["@@normalize"](keyFrames);
+    keyFrames = this.chains[index]["@@normalize"]([keyFrames])[0];
+    keyFrames = this.chains[index].devices["@@normalize"]([keyFrames])[0];
   }, this);
 
   return keyFrameSet;
@@ -173,6 +174,47 @@ Chain.prototype.solve = function( opts ) {
 
 };
 
+Chain.prototype["@@normalize"] = function(keyFrameSet) {
+  keyFrameSet.forEach( function(keyFrames) {
+    var last;
+
+    // If first element is null, use last position
+    if(keyFrames[0] === null) {
+      keyFrames[0] = { position: this.position };
+    }
+
+    keyFrames.forEach( function(keyFrame, keyFrameIndex) {
+
+      // If false is passed, use prior keyFrame value
+      if (keyFrame === false) {
+        keyFrames[keyFrameIndex] = last;
+        keyFrame = last;
+      }
+
+      // Handle false being passed in a three tuple
+      if (keyFrame !== null && Array.isArray(keyFrame.position)) {
+        keyFrame.position.forEach ( function(vector, vectorIndex) {
+          if (vector === false) {
+            keyFrames[keyFrameIndex].position[vectorIndex] = keyFrames[keyFrameIndex - 1].position[vectorIndex];
+          }
+        });
+      }
+
+      if (keyFrame !== null) {
+        last = keyFrame;
+      }
+    });
+
+    // If last element is null, use last position
+    if(keyFrames[keyFrames.length - 1] === null) {
+      keyFrames[keyFrames.length - 1] = last;
+    }
+
+  }, this);
+  return keyFrameSet;
+};
+
+
 // Find an end effector's position relative to the kinematic chain origin
 //
 // @param {Object} opts Options: {position[, origin][, orientation] }
@@ -226,25 +268,6 @@ Chain.prototype.eePosition = function(opts) {
 
   return posVector.v;
 
-};
-
-// Call the @@normalize function on the chain
-Chain.prototype["@@normalize"] = function(keyFrames) {
-
-  if (keyFrames[0] === null ) {
-    keyFrames[0] = {
-      position: this.position
-    };
-  }
-
-  keyFrames.forEach(function(keyFrame) {
-    if (typeof keyFrame.position !== "undefined") {
-      keyFrame.value = keyFrame.position;
-    }
-  });
-
-  keyFrames = this.devices["@@normalize"]([keyFrames])[0];
-  return keyFrames;
 };
 
 // Convert radians to degrees
