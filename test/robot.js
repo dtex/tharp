@@ -30,6 +30,11 @@ var sinon = require("sinon"),
         }
       }
     },
+    "@@normalize": function(keyFrames) {
+      if(keyFrames) {
+        return keyFrames;
+      }
+    },
     solve: function() {
       var angles = [1,0,1];
       return angles;
