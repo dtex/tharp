@@ -1,6 +1,6 @@
 # tharp
 
-![Dancing Robots](https://raw.githubusercontent.com/dtex/tharp/master/assets/tex-bot.png)
+![Dancing Robots](https://raw.githubusercontent.com/dtex/tharp/master/assets/tharp-banner-color.png)
 
 [![Join the chat at https://gitter.im/dtex/tharp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dtex/tharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
