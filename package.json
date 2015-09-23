@@ -1,6 +1,6 @@
 {
   "name": "tharp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Inverse Kinematic solvers and robot control, optimized for Johnny-Five",
   "main": "index.js",
   "scripts": {

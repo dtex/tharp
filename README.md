@@ -6,10 +6,8 @@
 
 [![Build Status](https://travis-ci.org/dtex/tharp.svg)](https://travis-ci.org/dtex/tharp)
 
-Tharp is an inverse kinematics solver and robot manager designed to work with Johnny-Five. It makes the hard things easy.
+Tharp is an inverse kinematics solver and robot manager designed to work with Johnny-Five. It makes the hard things easy. Check out this [video](http://www.youtube.com/watch?v=gabm8QdO29Q) highlighting Tharp's  performance.
 
-
-[![Tharp Response Time Demo](http://img.youtube.com/vi/gabm8QdO29Q/0.jpg)](http://www.youtube.com/watch?v=gabm8QdO29Q)
 
 ### Installation
 ````bash
