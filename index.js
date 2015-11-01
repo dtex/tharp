@@ -246,7 +246,7 @@ Chain.prototype.eePosition = function(opts) {
   // Chain origin position
   var oPosVector = new vector(oPos);
 
-  var rotationMatrix = new rotate.RotZ(roll);
+  var rotationMatrix = new rotate.RotY(roll);
   posVector = rotationMatrix.dot(posVector);
   oPosVector = rotationMatrix.dot(oPosVector);
 
@@ -254,7 +254,7 @@ Chain.prototype.eePosition = function(opts) {
   posVector = rotationMatrix.dot(posVector);
   oPosVector = rotationMatrix.dot(oPosVector);
 
-  rotationMatrix = new rotate.RotY(yaw);
+  rotationMatrix = new rotate.RotZ(yaw);
   posVector = rotationMatrix.dot(posVector);
   oPosVector = rotationMatrix.dot(oPosVector);
 
@@ -325,7 +325,7 @@ var findValidAngle = function(angle, range) {
 };
 
 var ikSolvers = {
-  "YZZ": function(chain, offsetPosition) {
+  "ZYY": function(chain, offsetPosition) {
 
     // Put the coordinates into seperate variables for readability
     var xd = offsetPosition[0];
@@ -340,12 +340,12 @@ var ikSolvers = {
     // This is the 3D hypoteneuse from the origin point to the end effector
     var hypot = Math.sqrt(xd_sq + yd_sq + zd_sq);
 
-    // This is the 2D hypoteneuse on the x/z plane.
-    var hypot2d = Math.sqrt(xd_sq + zd_sq);
+    // This is the 2D hypoteneuse on the x/y plane.
+    var hypot2d = Math.sqrt(xd_sq + yd_sq);
 
     // Calculate the coxa angle in radians.
     // This is a simple 2D right triangle solve (yay)
-    var coxaAngle = Math.atan(offsetPosition[2]/offsetPosition[0]);
+    var coxaAngle = Math.atan(yd/xd);
 
     // This is a slightly tougher triangle solve
     var tibiaAngle = solveAngle(chain.segments.femur, chain.segments.tibia, hypot);
@@ -359,7 +359,7 @@ var ikSolvers = {
     // subtract the angle described by the end effector, the femur origin
     // and the femur's axis of rotation.
     // It really is easier than I make it sound.
-    femurAngle += Math.sin(yd/hypot2d);
+    femurAngle += Math.sin(zd/hypot2d);
 
     // If the chain is on the left side we need to modify our solutions
     if (offsetPosition[0] < 0) {

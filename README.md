@@ -38,8 +38,8 @@ var board = new five.Board().on("ready", function() {
       {pin:39, offset: 87, startAt: 78, range: [-80, 78] },
       {pin:38, offset: 165, invert: true, startAt: -140, range: [-160, -10] }
     ],
-    chainType: "YZZ",
-    origin: [4.25, 2.875, 0.15],
+    chainType: "ZYY",
+    origin: [4.25, 0.15, 2.875],
     segments: { femur: 7.6125, tibia: 10.4 }
   });
 
@@ -50,8 +50,8 @@ var board = new five.Board().on("ready", function() {
       {pin:26, offset: -77, startAt: 102, range: [110, 260] },
       {pin:25, offset: -176, invert: true, startAt: 320, range: [180, 340]}
     ],
-    chainType: "YZZ",
-    origin: [-4.25, 2.875, 0.15],
+    chainType: "ZYY",
+    origin: [-4.25, 0.15, 2.875],
     segments: { femur: 7.6125, tibia: 10.4 }
   });
 
@@ -66,11 +66,11 @@ var board = new five.Board().on("ready", function() {
 
   // Now we can orient the chassis
   robot.orientation({ pitch: 0.1, roll: -0.08, yaw: -0.13 });
-  robot.offset([ 1, -0.2, -1 ]);
+  robot.offset([ 1, -1, -0.2 ]);
 
   // And position our end effectors
-  leftLegChain.solve({position: [8.25, -5.0, 12.25]});
-  rightLegChain.solve({position: [-8.25, -5.0, 12.25]});
+  leftLegChain.solve({position: [8.25, 12.25, -5.0]});
+  rightLegChain.solve({position: [-8.25, 12.25, -5.0]});
 
   // Move everything
   robot.render();

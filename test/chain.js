@@ -32,10 +32,10 @@ exports["Chain"] = {
 
     this.chain = new tharp.Chain({
       actuators: [ mockServo, mockServo, mockServo ],
-      chainType: "YZZ",
-      origin: [4, 2, 8],
+      chainType: "ZYY",
+      origin: [4, 8, 2],
       segments: { femur: 7.6125, tibia: 10.4 },
-      position: [11.25, 0, 12.15]
+      position: [11.25, 12.15, 0]
     });
 
     this.renderSpy = sinon.spy(mockServo, "@@render");
@@ -71,12 +71,12 @@ exports["Chain"] = {
 
     var eePos = this.chain.eePosition({
       position: [10, 10, 10],
-      origin: [4, 2, 8]
+      origin: [4, 8, 2]
     });
 
     test.equal(eePos[0], 6);
-    test.equal(eePos[1], 8);
-    test.equal(eePos[2], 2);
+    test.equal(eePos[1], 2);
+    test.equal(eePos[2], 8);
     test.done();
   },
 
@@ -86,7 +86,7 @@ exports["Chain"] = {
 
     var eePos = this.chain.eePosition({
       position: [10, 10, 10],
-      origin: [4, 2, 8],
+      origin: [4, 8, 2],
       orientation: {
         roll: 0.2
       }
@@ -104,7 +104,7 @@ exports["Chain"] = {
 
     var eePos = this.chain.eePosition({
       position: [10, 10, 10],
-      origin: [4, 2, 8],
+      origin: [4, 8, 2],
       orientation: {
         pitch: 0.2
       }
@@ -122,7 +122,7 @@ exports["Chain"] = {
 
     var eePos = this.chain.eePosition({
       position: [10, 10, 10],
-      origin: [4, 2, 8],
+      origin: [4, 8, 2],
       orientation: {
         yaw: 0.2
       }
@@ -140,7 +140,7 @@ exports["Chain"] = {
 
     var eePos = this.chain.eePosition({
       position: [10, 10, 10],
-      origin: [4, 2, 8],
+      origin: [4, 8, 2],
       orientation: {
         roll: 0.2,
         pitch: 0.2,
