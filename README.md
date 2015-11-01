@@ -38,7 +38,7 @@ var board = new five.Board().on("ready", function() {
       {pin:39, offset: 87, startAt: 78, range: [-80, 78] },
       {pin:38, offset: 165, invert: true, startAt: -140, range: [-160, -10] }
     ],
-    chainType: "CoxaY-FemurZ-TibiaZ",
+    chainType: "YZZ",
     origin: [4.25, 2.875, 0.15],
     segments: { femur: 7.6125, tibia: 10.4 }
   });
@@ -50,7 +50,7 @@ var board = new five.Board().on("ready", function() {
       {pin:26, offset: -77, startAt: 102, range: [110, 260] },
       {pin:25, offset: -176, invert: true, startAt: 320, range: [180, 340]}
     ],
-    chainType: "CoxaY-FemurZ-TibiaZ",
+    chainType: "YZZ",
     origin: [-4.25, 2.875, 0.15],
     segments: { femur: 7.6125, tibia: 10.4 }
   });

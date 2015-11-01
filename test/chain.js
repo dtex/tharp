@@ -32,7 +32,7 @@ exports["Chain"] = {
 
     this.chain = new tharp.Chain({
       actuators: [ mockServo, mockServo, mockServo ],
-      chainType: "CoxaY-FemurZ-TibiaZ",
+      chainType: "YZZ",
       origin: [4, 2, 8],
       segments: { femur: 7.6125, tibia: 10.4 },
       position: [11.25, 0, 12.15]

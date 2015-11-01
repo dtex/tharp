@@ -325,7 +325,7 @@ var findValidAngle = function(angle, range) {
 };
 
 var ikSolvers = {
-  "CoxaY-FemurZ-TibiaZ": function(chain, offsetPosition) {
+  "YZZ": function(chain, offsetPosition) {
 
     // Put the coordinates into seperate variables for readability
     var xd = offsetPosition[0];

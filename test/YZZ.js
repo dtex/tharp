@@ -17,14 +17,14 @@ var mockCoxaServoLeft = new mockServo({ range: [135, 225]});
 var mockFemurServoLeft = new mockServo({ range: [102, 260]});
 var mockTibiaServoLeft = new mockServo({ range: [190, 340]});
 
-exports["CoxaY-FemurZ-TibiaZ"] = {
+exports["YZZ"] = {
 
   // Quadrant 1 on the XZ plane, quadrant 1 or 2 on the XY plane
   q1xq12: function(test) {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
     }, [12, 1, 2]);
@@ -41,7 +41,7 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, 1, 2]);
@@ -58,7 +58,7 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, 1, -2]);
@@ -75,7 +75,7 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [12, 1, -2]);
@@ -92,7 +92,7 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
     }, [12, -1, 2]);
@@ -109,7 +109,7 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, -1, 2]);
@@ -126,7 +126,7 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, -1, -2]);
@@ -143,7 +143,7 @@ exports["CoxaY-FemurZ-TibiaZ"] = {
 
     test.expect(3);
 
-    var angles = tharp.ikSolvers["CoxaY-FemurZ-TibiaZ"]({
+    var angles = tharp.ikSolvers["YZZ"]({
       segments: { femur: 7.6125, tibia: 10.4 },
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [12, -1, -2]);
