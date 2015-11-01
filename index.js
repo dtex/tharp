@@ -54,13 +54,12 @@ Robot.prototype["@@render"] = function(opts) {
   opts = opts || {};
 
   this.chains.forEach( function(chain, index) {
-    if (opts.length < index - 1) {
-      opts[index] = chain.position;
+    if (typeof opts[index] === "undefined") {
+      opts[index] = chain.devices.last.target;
     }
     if (!(chain.solve({position: opts[index], orientation: this.orientation, offset: this.offset }))) {
       passed = false;
     }
-
   }, this);
 
   if (passed) {
