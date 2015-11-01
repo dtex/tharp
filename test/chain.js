@@ -92,9 +92,9 @@ exports["Chain"] = {
       }
     });
 
-    test.equal(eePos[0].toPrecision(5), 4.2910);
-    test.equal(eePos[1].toPrecision(5), 9.0325);
-    test.equal(eePos[2], 2);
+    test.equal(eePos[0].toPrecision(5), 7.4698);
+    test.equal(eePos[1].toPrecision(5), 2.0000);
+    test.equal(eePos[2].toPrecision(5), 6.6485);
     test.done();
   },
 
@@ -111,8 +111,8 @@ exports["Chain"] = {
     });
 
     test.equal(eePos[0].toPrecision(5), 6);
-    test.equal(eePos[1].toPrecision(5), 7.4432);
-    test.equal(eePos[2].toPrecision(5), 3.5495);
+    test.equal(eePos[1].toPrecision(5), 0.37078);
+    test.equal(eePos[2].toPrecision(5), 8.2379);
     test.done();
   },
 
@@ -128,9 +128,9 @@ exports["Chain"] = {
       }
     });
 
-    test.equal(eePos[0].toPrecision(5), 6.2777);
-    test.equal(eePos[1].toPrecision(5), 8);
-    test.equal(eePos[2].toPrecision(5), 0.76812);
+    test.equal(eePos[0].toPrecision(5), 5.4831);
+    test.equal(eePos[1].toPrecision(5), 3.1521);
+    test.equal(eePos[2].toPrecision(5), 8.0000);
     test.done();
   },
 
@@ -148,9 +148,9 @@ exports["Chain"] = {
       }
     });
 
-    test.equal(eePos[0].toPrecision(5), 4.9514);
-    test.equal(eePos[1].toPrecision(5), 8.4552);
-    test.equal(eePos[2].toPrecision(5), 2.8273);
+    test.equal(eePos[0].toPrecision(5), 7.1939);
+    test.equal(eePos[1].toPrecision(5), 2.1105);
+    test.equal(eePos[2].toPrecision(5), 6.9133);
     test.done();
   }
 };
