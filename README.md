@@ -33,33 +33,33 @@ var board = new five.Board().on("ready", function() {
   // the joint/segment configuration.
   var leftLeg = new tharp.Chain({
     constructor: five.Servos,
+    chainType: "ZYY",
+    origin: [4.25, 0.15, 2.875],
+    segments: [ 2.6, 7.6125, 10.4],
     actuators: [
       {pin:40, offset: 24, startAt: 0, range: [0, 90] },
       {pin:39, offset: 87, startAt: 78, range: [-80, 78] },
       {pin:38, offset: 165, invert: true, startAt: -140, range: [-160, -10] }
-    ],
-    chainType: "ZYY",
-    origin: [4.25, 0.15, 2.875],
-    segments: { femur: 7.6125, tibia: 10.4 }
+    ]
   });
 
   var rightLeg = new tharp.Chain({
     constructor: five.Servos,
+    chainType: "ZYY",
+    origin: [-4.25, 0.15, 2.875],
+    segments: [ 2.6, 7.6125, 10.4],
     actuators: [
       {pin:27, offset: -31, startAt: 180, range: [90, 180] },
       {pin:26, offset: -77, startAt: 102, range: [110, 260] },
       {pin:25, offset: -176, invert: true, startAt: 320, range: [180, 340]}
-    ],
-    chainType: "ZYY",
-    origin: [-4.25, 0.15, 2.875],
-    segments: { femur: 7.6125, tibia: 10.4 }
+    ]
   });
 
   // Robot() wraps our chains, gives us a place to orient the
   // robot chassis and ensures that all chains can be rendered
   // before rendering the entire robot movement
   var robot = new tharp.Robot({
-    chains: [leftLeg, rightLeg]
+    chains: [rightLeg, leftLeg]
   });
 
   /* === End robot configuration === */
@@ -69,8 +69,8 @@ var board = new five.Board().on("ready", function() {
   robot.offset([ 1, -1, -0.2 ]);
 
   // And position our end effectors
-  leftLegChain.solve({position: [8.25, 12.25, -5.0]});
-  rightLegChain.solve({position: [-8.25, 12.25, -5.0]});
+  rightLegChain.solve({position: [8.25, 2.5, -5.0]});
+  leftLegChain.solve({position: [-8.25, -2.25, -5.0]});
 
   // Move everything
   robot.render();
@@ -78,3 +78,6 @@ var board = new five.Board().on("ready", function() {
 });
 
 ````
+### Breaking Changes
+* 1.0.0 Swapped Y and Z axes to better match best practices. Renamed "CoxaY-FemurZ-TibiaZ" chain type to "ZYY".
+* 2.0.0 Changes ```segments``` to an array since part names are arbitrary. One person's "coxa" is another person's "hip" and then another person's "shoulder".
