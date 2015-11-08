@@ -345,8 +345,8 @@ var ikSolvers = {
     angles[0] = degToRad(degrees[0]);
 
     // Subtract the first segment from our offset
-    yd = yd - Math.cos(angles[0]) * chain.segments.coxa;
-    xd = xd - Math.sin(angles[0]) * chain.segments.coxa;
+    yd = yd - Math.cos(angles[0]) * chain.segments[0];
+    xd = xd - Math.sin(angles[0]) * chain.segments[0];
 
     // We use the squares of these a lot so let's store the result
     var xd_sq = xd * xd;
@@ -360,10 +360,10 @@ var ikSolvers = {
     var hypot2d = Math.sqrt(xd_sq + yd_sq);
 
     // This is a slightly tougher triangle solve
-    angles[2] = solveAngle(chain.segments.femur, chain.segments.tibia, hypot);
+    angles[2] = solveAngle(chain.segments[1], chain.segments[2], hypot);
 
     // Our last triangle solve
-    angles[1] = solveAngle(chain.segments.femur, hypot, chain.segments.tibia);
+    angles[1] = solveAngle(chain.segments[1], hypot, chain.segments[2]);
 
     // But wait! The 2nd joint angle returned represents the angle between the
     // 2nd joint and the 2D hypoteneuse but we actually want the angle between
