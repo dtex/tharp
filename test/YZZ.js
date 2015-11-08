@@ -25,13 +25,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
     }, [12, 2, 1]);
 
     test.equal(angles[0].toPrecision(5), 9.4623);
-    test.equal(angles[1].toPrecision(5), 62.593);
-    test.equal(angles[2].toPrecision(5), -96.203);
+    test.equal(angles[1].toPrecision(5), 66.237);
+    test.equal(angles[2].toPrecision(5), -101.24);
 
     test.done();
   },
@@ -42,13 +42,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, 2, 1]);
 
     test.equal(angles[0].toPrecision(5), 170.54);
-    test.equal(angles[1].toPrecision(5), 117.41);
-    test.equal(angles[2].toPrecision(5), 276.20);
+    test.equal(angles[1].toPrecision(5), 124.26);
+    test.equal(angles[2].toPrecision(5), 266.32);
 
     test.done();
   },
@@ -59,13 +59,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, -2, 1]);
 
     test.equal(angles[0].toPrecision(5), 189.46);
-    test.equal(angles[1].toPrecision(5), 117.41);
-    test.equal(angles[2].toPrecision(5), 276.20);
+    test.equal(angles[1].toPrecision(5), 113.76);
+    test.equal(angles[2].toPrecision(5), 281.24);
 
     test.done();
   },
@@ -76,13 +76,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [12, -2, 1]);
 
     test.equal(angles[0].toPrecision(5), 170.54);
-    test.equal(angles[1].toPrecision(5), 242.59);
-    test.equal(angles[2].toPrecision(5), 263.80);
+    test.equal(angles[1].toPrecision(5), 246.24);
+    test.equal(angles[2].toPrecision(5), 258.76);
 
     test.done();
   },
@@ -93,13 +93,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
     }, [12, 2, -1]);
 
     test.equal(angles[0].toPrecision(5), 9.4623);
-    test.equal(angles[1].toPrecision(5), 53.184);
-    test.equal(angles[2].toPrecision(5), -96.203);
+    test.equal(angles[1].toPrecision(5), 56.359);
+    test.equal(angles[2].toPrecision(5), -101.24);
 
     test.done();
   },
@@ -110,13 +110,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, 2, -1]);
 
     test.equal(angles[0].toPrecision(5), 170.54);
-    test.equal(angles[1].toPrecision(5), 126.82);
-    test.equal(angles[2].toPrecision(5), 276.20);
+    test.equal(angles[1].toPrecision(5), 132.91);
+    test.equal(angles[2].toPrecision(5), 266.32);
 
     test.done();
   },
@@ -127,13 +127,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, -2, -1]);
 
     test.equal(angles[0].toPrecision(5), 189.46);
-    test.equal(angles[1].toPrecision(5), 126.82);
-    test.equal(angles[2].toPrecision(5), 276.20);
+    test.equal(angles[1].toPrecision(5), 123.64);
+    test.equal(angles[2].toPrecision(5), 281.24);
 
     test.done();
   },
@@ -144,13 +144,13 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: { femur: 7.6125, tibia: 10.4 },
+      segments: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [12, -2, -1]);
 
     test.equal(angles[0].toPrecision(5), 170.54);
-    test.equal(angles[1].toPrecision(5), 233.18);
-    test.equal(angles[2].toPrecision(5), 263.80);
+    test.equal(angles[1].toPrecision(5), 236.36);
+    test.equal(angles[2].toPrecision(5), 258.76);
 
     test.done();
   },
