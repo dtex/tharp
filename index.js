@@ -83,7 +83,7 @@ Robot.prototype["@@render"] = function(opts) {
 //    system type? Open an issue, or better yet a Pull Request!
 //  - opts.origin {Array}: A three-tuple representing the x, y and z offset of the
 //    chain's origin point from the robot's origin point.
-//  - opts.segments {Object}: An object with the segment names and lengths for our system
+//  - opts.links {Object}: An array with the link lengths for our system
 //    The names vary with the systemType
 //
 // returns this chain
@@ -101,7 +101,7 @@ function Chain(opts) {
 
   this.chainType = opts.chainType;
 
-  this.segments = opts.segments;
+  this.links = opts.links;
 
   this.origin = opts.origin || [0, 0, 0];
   this.position = opts.startAt || [0, 0, 0];

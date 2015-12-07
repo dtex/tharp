@@ -12,7 +12,7 @@ var instanceProperties = [{
 },{
   name: "chainType"
 },{
-  name: "segments"
+  name: "links"
 },{
   name: "origin"
 },{
@@ -34,7 +34,7 @@ exports["Chain"] = {
       actuators: [ mockServo, mockServo, mockServo ],
       chainType: "ZYY",
       origin: [4, 8, 2],
-      segments: { femur: 7.6125, tibia: 10.4 },
+      links: { femur: 7.6125, tibia: 10.4 },
       position: [11.25, 12.15, 0]
     });
 

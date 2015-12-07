@@ -25,7 +25,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
     }, [12, 2, 1]);
 
@@ -42,7 +42,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, 2, 1]);
 
@@ -59,7 +59,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, -2, 1]);
 
@@ -76,7 +76,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [12, -2, 1]);
 
@@ -93,7 +93,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServo, mockFemurServo, mockTibiaServo ],
     }, [12, 2, -1]);
 
@@ -110,7 +110,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, 2, -1]);
 
@@ -127,7 +127,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [-12, -2, -1]);
 
@@ -144,7 +144,7 @@ exports["ZYY"] = {
     test.expect(3);
 
     var angles = tharp.ikSolvers["ZYY"]({
-      segments: [ 2.6, 7.6125, 10.4 ],
+      links: [ 2.6, 7.6125, 10.4 ],
       devices: [ mockCoxaServoLeft, mockFemurServoLeft, mockTibiaServoLeft ],
     }, [12, -2, -1]);
 

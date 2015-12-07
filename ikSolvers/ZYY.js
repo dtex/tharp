@@ -19,9 +19,9 @@ module.exports = function(chain, offsetPosition) {
   // We still need this in radians
   angles[0] = utils.degToRad(degrees[0]);
 
-  // Subtract the first segment from our offset
-  yd = yd - Math.cos(angles[0]) * chain.segments[0];
-  xd = xd - Math.sin(angles[0]) * chain.segments[0];
+  // Subtract the first link from our offset
+  yd = yd - Math.cos(angles[0]) * chain.links[0];
+  xd = xd - Math.sin(angles[0]) * chain.links[0];
 
   // We use the squares of these a lot so let's store the result
   var xd_sq = xd * xd;
@@ -35,10 +35,10 @@ module.exports = function(chain, offsetPosition) {
   var hypot2d = Math.sqrt(xd_sq + yd_sq);
 
   // This is a slightly tougher triangle solve
-  angles[2] = utils.solveAngle(chain.segments[1], chain.segments[2], hypot);
+  angles[2] = utils.solveAngle(chain.links[1], chain.links[2], hypot);
 
   // Our last triangle solve
-  angles[1] = utils.solveAngle(chain.segments[1], hypot, chain.segments[2]);
+  angles[1] = utils.solveAngle(chain.links[1], hypot, chain.links[2]);
 
   // But wait! The 2nd joint angle returned represents the angle between the
   // 2nd joint and the 2D hypoteneuse but we actually want the angle between

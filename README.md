@@ -30,12 +30,12 @@ var board = new five.Board().on("ready", function() {
 
   // Tharp.Chain() wraps our actuators and adds properties
   // that define the kinematic system. The "chainType" property defines
-  // the joint/segment configuration.
+  // the joint/link configuration.
   var leftLeg = new tharp.Chain({
     constructor: five.Servos,
     chainType: "ZYY",
     origin: [4.25, 0.15, 2.875],
-    segments: [ 2.6, 7.6125, 10.4],
+    links: [ 2.6, 7.6125, 10.4],
     actuators: [
       {pin:40, offset: 24, startAt: 0, range: [0, 90] },
       {pin:39, offset: 87, startAt: 78, range: [-80, 78] },
@@ -47,7 +47,7 @@ var board = new five.Board().on("ready", function() {
     constructor: five.Servos,
     chainType: "ZYY",
     origin: [-4.25, 0.15, 2.875],
-    segments: [ 2.6, 7.6125, 10.4],
+    links: [ 2.6, 7.6125, 10.4],
     actuators: [
       {pin:27, offset: -31, startAt: 180, range: [90, 180] },
       {pin:26, offset: -77, startAt: 102, range: [110, 260] },
@@ -81,3 +81,4 @@ var board = new five.Board().on("ready", function() {
 ### Breaking Changes
 * 1.0.0 Swapped Y and Z axes to better match best practices. Renamed "CoxaY-FemurZ-TibiaZ" chain type to "ZYY".
 * 2.0.0 Changes ```segments``` to an array since part names are arbitrary. One person's "coxa" is another person's "hip" and then another person's "shoulder".
+* 3.0.0 Changes ```segments``` to ```links``` to reflect the proper name.
